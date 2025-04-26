@@ -1,11 +1,11 @@
 import { Injectable } from "@nestjs/common";
-import { Produto } from "./produto.type";
+import { DadosProdutoDTO } from "./produto.type";
 
 @Injectable()
 export class ProdutoRepository {
-    private produtos: Produto[] = [];
+    private produtos: DadosProdutoDTO[] = [];
     
-    public salvar = async (produto: Produto) => {
+    public salvar = async (produto: DadosProdutoDTO) => {
         this.produtos.push(produto);
     };
 

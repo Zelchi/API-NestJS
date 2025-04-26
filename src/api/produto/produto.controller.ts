@@ -1,6 +1,6 @@
 import { Controller, Post, Get, Body } from '@nestjs/common';
 import { ProdutoRepository } from './produto.repository';
-import { Produto } from './produto.type';
+import { DadosProdutoDTO } from './produto.type';
 
 @Controller('/produtos')
 export class ProdutoController {
@@ -11,7 +11,7 @@ export class ProdutoController {
     };
 
     @Post('/')
-    public async criaProduto(@Body() produto: Produto) {
+    public async criaProduto(@Body() produto: DadosProdutoDTO) {
         console.log(produto);
         this.repository.salvar(produto);
         return { status: 'Produto criado com sucesso!' };

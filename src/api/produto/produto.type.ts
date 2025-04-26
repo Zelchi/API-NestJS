@@ -1,17 +1,60 @@
-export type Produto = {
+import { IsArray, IsDate, IsNotEmpty, IsNumber, IsString, ValidateNested } from "class-validator";
+import { Type } from "class-transformer";
+
+class CaracteristicaDTO {
+    @IsString()
+    @IsNotEmpty()
     nome: string;
-    valor: number;
-    quantidadeDisponivel: number;
+
+    @IsString()
+    @IsNotEmpty()
     descricao: string;
-    caracteristicas: {
-        nome: string;
-        descricao: string;
-    }[];
-    imagens: {
-        url: string;
-        descricao: string;
-    }[];
+}
+
+class ImagemDTO {
+    @IsString()
+    @IsNotEmpty()
+    url: string;
+
+    @IsString()
+    @IsNotEmpty()
+    descricao: string;
+}
+
+export class DadosProdutoDTO {
+    @IsString()
+    @IsNotEmpty()
+    nome: string;
+
+    @IsNumber()
+    valor: number;
+
+    @IsNumber()
+    quantidadeDisponivel: number;
+
+    @IsString()
+    @IsNotEmpty()
+    descricao: string;
+
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => CaracteristicaDTO)
+    caracteristicas: CaracteristicaDTO[];
+
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ImagemDTO)
+    imagens: ImagemDTO[];
+
+    @IsString()
+    @IsNotEmpty()
     categoria: string;
-    dataCriacao: string;
-    dataAtualizacao: string;
-};
+
+    @IsDate()
+    @Type(() => Date)
+    dataCriacao: Date;
+
+    @IsDate()
+    @Type(() => Date)
+    dataAtualizacao: Date;
+}
