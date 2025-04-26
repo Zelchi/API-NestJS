@@ -22,6 +22,10 @@ class ImagemDTO {
 }
 
 export class DadosProdutoDTO {
+    @IsNotEmpty({ message: 'O userid não pode ser vazio' })
+    @IsNumber(undefined, { message: 'O userid deve ser um número' })
+    userid: number;
+
     @IsString()
     @IsNotEmpty()
     nome: string;
