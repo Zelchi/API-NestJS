@@ -1,5 +1,5 @@
 import { IsEmail, IsNotEmpty, IsString, IsStrongPassword } from "class-validator";
-import { isEmailRegistered } from "../validation/emailValidation";
+import { isEmailRegistered } from "../validations/validarEmail";
 
 export class DadosUsuarioDTO { 
     @IsString({ message: 'O nome deve ser uma string' })

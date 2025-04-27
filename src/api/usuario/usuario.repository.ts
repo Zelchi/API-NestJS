@@ -10,9 +10,18 @@ export class UsuarioRepository {
         console.log('Usuarios salvos:', this.usuarios);
     }
 
-    public async listar() {
-        return this.usuarios;
-    }
+    public async listarTodos() {
+        const listaUser: Array<{ id: string, nome: string }> = [];
+
+        for (const usuario of this.usuarios) {
+            listaUser.push({
+                id: usuario.id,
+                nome: usuario.nome
+            });
+        }
+
+        return listaUser;
+    };
 
     public async emailJaCadastrado(email: string): Promise<boolean> {
         const usuario = this.usuarios.find(usuario => usuario.email === email);
