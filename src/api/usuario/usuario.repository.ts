@@ -10,6 +10,15 @@ export class UsuarioRepository {
         console.log('Usuarios salvos:', this.usuarios);
     }
 
+    private async buscaPorID (id: string): Promise<UsuarioEntity> {
+
+        const usuario = this.usuarios.find(usuario => usuario.id === id);
+
+        if (!usuario) throw new Error('Usuario não encontrado');
+
+        return usuario;
+    }
+
     public async listarTodos() {
         const listaUser: Array<{ id: string, nome: string }> = [];
 
@@ -26,5 +35,25 @@ export class UsuarioRepository {
     public async emailJaCadastrado(email: string): Promise<boolean> {
         const usuario = this.usuarios.find(usuario => usuario.email === email);
         return usuario ? true : false;
+    }
+
+    public async atualiza(id: string, novosDados: Partial<UsuarioEntity>): Promise<UsuarioEntity> {
+        const usuario = this.buscaPorID(id);
+
+        Object.entries(novosDados).forEach(([key, value]) => {
+            if (key == 'id') return;
+            if (key == 'dataCadastro') return;
+            if (value) usuario[key] = value;
+        });
+
+        return usuario;
+    }
+
+    public async deleta(id: string): Promise<UsuarioEntity> {
+        const usuario = this.buscaPorID(id);
+        
+        this.usuarios = this.usuarios.filter(usuario => usuario.id !== id);
+
+        return usuario;
     }
 }
