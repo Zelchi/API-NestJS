@@ -67,23 +67,6 @@ npm run test
 
 ---
 
-### 🏗️ Estrutura do Projeto (padrão NestJS)
-
-```
-src/
-├── app.module.ts
-├── main.ts
-├── modules/
-│   └── exemplo/
-│       ├── exemplo.controller.ts
-│       ├── exemplo.service.ts
-│       ├── exemplo.module.ts
-│       └── entities/
-│           └── exemplo.entity.ts
-```
-
----
-
 ### 📚 Aprendizados
 
 Este projeto cobre:
